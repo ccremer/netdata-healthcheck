@@ -18,7 +18,6 @@ ENV \
     N_HTTP_STATUS_CODES="200" \
     N_HTTP_REDIRECT="yes" \
     N_HTTP_NAME="local" \
-    N_PORT_HOST="localhost" \
     N_PORT_NAME="local" \
     N_PORT_TIMEOUT="3" \
     N_FPING_OPTS="-R -b 56 -i 1 -r 0 -t 5000" \

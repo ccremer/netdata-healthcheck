@@ -19,10 +19,10 @@ Key | Default value | Accepted values | Description
 `N_HTTP_STATUS_CODES`  | `200`   | integer list | Specify a space separated list of acceptable http status codes.
 `N_HTTP_TIMEOUT`       | `1`     | decimal | Specify the response timeout in seconds (supports decimals).
 `N_HTTP_UPDATE_EVERY`  | (unset) | integer | The chart update frequency for http checks (by default inherits from netdata).
-`N_PORT_HOST`          | `localhost` | IP or DNS | The host for the port check.
-`N_PORT_NAME`          | `local` | string | The job name of the port check.
+`N_PORT_HOST`          | (unset) | IP or DNS | The host for the port check.
+`N_PORT_PORT`          | (unset) | integer | Ports number to check on `N_PORT_HOST`.
+`N_PORT_NAME`          | `local` | string  | The job name of the port check.
 `N_PORT_TIMEOUT`       | `3`     | integer | The socket timeout when connecting.
-`N_PORT_PORTS`         | (unset) | integer list | Space-separated list of ports to check on `N_PORT_HOST`.
 `N_PORT_UPDATE_EVERY`  | (unset) | integer | The chart update frequency for port checks (by default inherits from netdata).
 
 Make sure to properly escape the supplied regex for yaml-parsing.
@@ -39,7 +39,7 @@ The default fping options are:
 
 * If you want check multiple hosts for port/http then you will have to mount `/etc/netdata/python.d/httpcheck.conf`
   and `/etc/netdata/python.d/portcheck.conf` from outside this container. But then you should not specify
-  `N_HTTP_URL` or `N_PORT_PORTS` resp. anymore, as they would probably cause a mess in your config.
+  `N_HTTP_URL` or `N_PORT_PORT` resp. anymore, as they would probably cause a mess in your config.
 * By default, a series of 5 pings will be sent to every host per second. If you don't want to bombard your
   hosts, set `N_FPING_UPDATE_EVERY` to `5` and `N_FPING_PING_EVERY` to `1000`
   in order to send 1 ping every second. The downside is, that the chart will be updated every 5 seconds
@@ -59,7 +59,7 @@ services:
       - N_FPING_HOSTNAMES=google.com
       - N_HTTP_URL=https://google.com/
       - N_PORT_HOST=google.com
-      - N_PORT_PORTS=443
+      - N_PORT_PORT=443
       - N_ENABLE_WEB=yes
     ports:
       - "19999:19999"
@@ -96,9 +96,9 @@ services:
       - N_HTTP_TIMEOUT=1
       - N_HTTP_UPDATE_EVERY=1
       - N_PORT_HOST=google.com
+      - N_PORT_PORT=443
       - N_PORT_NAME=google
-      - N_PORT_TIMEOUT=3
-      - N_PORT_PORTS=443
+      - N_PORT_TIMEOUT=1
       - N_PORT_UPDATE_EVERY=1
       # streaming is optional, but recommended if you have a netdata master
       - N_STREAM_DESTINATION=your.netdata.master

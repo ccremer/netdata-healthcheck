@@ -20,12 +20,8 @@ write_port_config() {
 
     write "${N_PORT_NAME}:"
     write "  host: ${N_PORT_HOST}"
+    write "  port: ${N_PORT_PORT}"
     write "  timeout: ${N_PORT_TIMEOUT}"
-    write "  ports:"
-
-    for port in ${N_PORT_PORTS}; do
-        write "    - ${port}"
-    done
 
 }
 
@@ -33,10 +29,10 @@ write_port_config() {
 # The actual work
 
 
-if [[ -n ${N_PORT_PORTS} ]]; then
+if [[ -n ${N_PORT_PORT} && -n ${N_PORT_HOST} ]]; then
     write_port_config
 else
-    echo "WARNING: Environment variable N_PORT_PORTS is not defined, which disables portcheck."
+    echo "WARNING: Environment variables N_PORT_PORT or N_PORT_HOST are not defined, which disables portcheck."
 fi
 
 # Enable python.d plugin

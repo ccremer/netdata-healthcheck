@@ -74,7 +74,7 @@ You can now browse to http://localhost:19999/
 ```yaml
 version: '3'
 services:
-  netdata-fping:
+  netdata-healthcheck:
     restart: unless-stopped
     image: braindoctor/netdata-healthcheck
     container_name: netdata-healthcheck

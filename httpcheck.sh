@@ -44,7 +44,5 @@ else
     echo "WARNING: Environment variable N_HTTP_URL is not defined, which disables httpcheck."
 fi
 
-cat ${config}
-
 # Enable python.d plugin
 crudini --inplace --set ${netdata_config} plugins python.d yes

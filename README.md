@@ -22,7 +22,7 @@ Key | Default value | Accepted values | Description
 `N_PORT_HOST`          | (unset) | IP or DNS | The host for the port check.
 `N_PORT_PORT`          | (unset) | integer | Ports number to check on `N_PORT_HOST`.
 `N_PORT_NAME`          | `local` | string  | The job name of the port check.
-`N_PORT_TIMEOUT`       | `3`     | integer | The socket timeout when connecting.
+`N_PORT_TIMEOUT`       | `1`     | integer | The socket timeout when connecting.
 `N_PORT_UPDATE_EVERY`  | (unset) | integer | The chart update frequency for port checks (by default inherits from netdata).
 
 Make sure to properly escape the supplied regex for yaml-parsing.
@@ -48,7 +48,7 @@ The default fping options are:
   the affected hosts won't be in the charts.
 * Alarms are disabled by default, but you can enable them on a nedata master, if this container is a slave.
 
-## Docker Compose
+## Docker Compose Quick start
 
 ```yaml
 version: '3'
@@ -69,8 +69,7 @@ services:
 
 You can now browse to http://localhost:19999/
 
-<details>
- <summary>=> Docker Compose Full Example <=</summary>
+## Docker Compose Full example
 
 ```yaml
 version: '3'
@@ -108,8 +107,6 @@ services:
     ports:
       - "19999:19999"
 ```
-</details>
-
 
 Pro tip: You can add `extra_hosts` to create host names that do not require a TLD, so that
 the charts will have sensible names that do not expose host names. The downside is that the

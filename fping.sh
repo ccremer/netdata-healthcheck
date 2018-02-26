@@ -4,8 +4,12 @@ config_dir="/etc/netdata"
 netdata_config="${config_dir}/netdata.conf"
 fping_conf="${config_dir}/fping.conf"
 
+log() {
+    echo "[netdata] ${1}"
+}
+
 if [[ -z ${N_FPING_HOSTNAMES} ]]; then
-    echo "WARNING: Environment variable N_FPING_HOSTNAMES is not defined, which disables fping."
+    log "WARNING: Environment variable N_FPING_HOSTNAMES is not defined, which disables fping."
 else
     # Apply the fping configs
     mv ${fping_conf} ${fping_conf}.orig

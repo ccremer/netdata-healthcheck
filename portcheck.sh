@@ -3,13 +3,13 @@
 config_dir="/etc/netdata"
 netdata_config="${config_dir}/netdata.conf"
 config="${config_dir}/python.d/portcheck.conf"
-
+tmp_config="/tmp/portcheck.yml"
 
 #-----------------------
 # Functions
 
 write() {
-    echo "${1}" >> ${config}
+    echo "${1}" >> ${tmp_config}
 }
 
 write_port_config() {
@@ -25,14 +25,22 @@ write_port_config() {
 
 }
 
+log() {
+    echo "[netdata] ${1}"
+}
+
 #-----------------------
 # The actual work
 
 
 if [[ -n ${N_PORT_PORT} && -n ${N_PORT_HOST} ]]; then
+    orig="${config}.orig"
+    mv ${config} ${orig}
     write_port_config
+    merge-yaml -i "${orig}" ${tmp_config} -o ${config}
+    rm ${tmp_config}
 else
-    echo "WARNING: Environment variables N_PORT_PORT or N_PORT_HOST are not defined, which disables portcheck."
+    log "WARNING: Environment variables N_PORT_PORT or N_PORT_HOST are not defined, which disables portcheck."
 fi
 
 # Enable python.d plugin

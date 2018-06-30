@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 config_dir="/etc/netdata"
 netdata_config="${config_dir}/netdata.conf"

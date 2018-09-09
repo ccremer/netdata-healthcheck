@@ -1,5 +1,5 @@
-FROM braindoctor/netdata-minimal:armv7hf
-RUN ["cross-build-start"]
+ARG ARCH
+FROM braindoctor/netdata-minimal:${ARCH}
 
 ENV \
     N_HTTP_TIMEOUT="1" \
@@ -12,6 +12,4 @@ ENV \
     N_FPING_PING_EVERY="200"
 
 COPY ["httpcheck.sh", "portcheck.sh", "fping.sh", "/etc/netdata/pre-start.d/"]
-COPY ["*.yml", "/etc/netdata/overrides/"]
-
-RUN ["cross-build-end"]
+COPY ["overrides/*.yml", "/etc/netdata/overrides/"]

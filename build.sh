@@ -15,7 +15,7 @@ docker run --rm --privileged multiarch/qemu-user-static:register --reset
 for ARCH in armhf amd64 i386 aarch64; do
      docker build --build-arg ARCH="${ARCH}" --tag "${REPOSITORY}:${ARCH}${VERSION}" --file Dockerfile ./
 done
-docker tag "${REPOSITORY}:${ARCH}${VERSION}" "${REPOSITORY}:latest"
+docker tag "${REPOSITORY}:amd64" "${REPOSITORY}:latest"
 
 # Push images to registry
 if [ -z ${DOCKER_USERNAME+x} ]; then

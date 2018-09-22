@@ -4,6 +4,7 @@ default_run: false
 chrony: false
 go_expvar: false
 example: false
+cpufreq: false
 
 # Enable http and port check
 httpcheck: true
